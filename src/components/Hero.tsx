@@ -3,7 +3,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import heroBg from '../assets/imagem de fundo hero section.jpeg';
 import { GYM_INFO } from '../data/gymInfo';
-import { ArrowRight, MessageCircle, ShieldCheck, MapPin } from 'lucide-react';
+import { ArrowRight, MessageCircle, ShieldCheck } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -12,13 +12,7 @@ export const Hero: React.FC = () => {
     () => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      tl.from('.hero-badge', {
-        y: 20,
-        opacity: 0,
-        duration: 0.7,
-        delay: 0.1,
-      })
-      .from(
+      tl.from(
         '.hero-title',
         {
           y: 35,
@@ -71,10 +65,7 @@ export const Hero: React.FC = () => {
         <div className="max-w-4xl mx-auto space-y-5 sm:space-y-6">
 
           {/* Badge superior com autoridade local */}
-          <div className="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm font-semibold backdrop-blur-md">
-            <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Rede com 4 Unidades em Chapecó - SC</span>
-          </div>
+          
 
           {/* Título Principal com a essência FitLife */}
           <h1 className="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-display text-white tracking-tight uppercase leading-[1.08] max-w-4xl mx-auto">
