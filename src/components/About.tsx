@@ -24,7 +24,7 @@ export const About: React.FC = () => {
             </p>
 
             <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
-              Com **4 unidades completas e climatizadas** (Passo dos Fortes, Esplanada, Presidente Médici e Grande Efapi), você tem a liberdade de treinar onde estiver. Nossos instrutores estão sempre presentes para tirar dúvidas, ajustar movimentos e criar um ambiente familiar, motivador e focado no seu progresso diário.
+              Com <strong>4 unidades completas e climatizadas</strong> (Passo dos Fortes, Esplanada, Presidente Médici e Grande Efapi), você tem a liberdade de treinar onde estiver. Nossos instrutores estão sempre presentes para tirar dúvidas, ajustar movimentos e criar um ambiente familiar, motivador e focado no seu progresso diário.
             </p>
 
             {/* Diferenciais em lista */}
