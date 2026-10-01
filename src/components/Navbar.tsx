@@ -73,7 +73,6 @@ export const Navbar: React.FC = () => {
       } ${isHiddenMobile ? '-translate-y-28 md:translate-y-0 opacity-0 md:opacity-100' : 'translate-y-0 opacity-100'}`}
     >
       <div className="w-full max-w-7xl flex items-center justify-between pointer-events-none">
-        
         {/* Pílula Principal (Desktop): Logo + Divisor + Links de Navegação */}
         <nav
           className={`pointer-events-auto flex items-center justify-between md:justify-start rounded-full transition-all duration-500 ease-out w-full md:w-auto ${
@@ -82,7 +81,7 @@ export const Navbar: React.FC = () => {
               : 'bg-black/80 backdrop-blur-md border border-white/15 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.5)] px-4 sm:px-6 py-2 sm:py-2.5 gap-3 sm:gap-6'
           }`}
         >
-          {/* Logo da FitLife */}
+          {/* Logo da FitLife oficial com respiro */}
           <div className="flex items-center shrink-0">
             <a
               href="#inicio"
@@ -132,19 +131,18 @@ export const Navbar: React.FC = () => {
             href={GYM_INFO.contact.whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black text-xs sm:text-sm font-black uppercase tracking-wider whitespace-nowrap shadow-[0_4px_14px_0_rgba(16,185,129,0.35)] hover:scale-[1.02] active:scale-95 transition-all duration-300 leading-none"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-extrabold uppercase tracking-wider whitespace-nowrap shadow-[0_4px_14px_0_rgba(16,185,129,0.35)] hover:scale-[1.02] active:scale-95 transition-all duration-300 leading-none"
           >
             <span>Fale Conosco</span>
             <span className="text-base font-bold leading-none">&rarr;</span>
           </a>
         </div>
-
       </div>
 
       {/* Menu Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="pointer-events-auto absolute top-full mt-2 inset-x-4 max-w-lg mx-auto rounded-3xl p-5 border border-emerald-500/30 bg-black/95 text-white backdrop-blur-2xl shadow-2xl animate-in fade-in slide-in-from-top-3">
-          <div className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold mb-3 bg-zinc-900 border border-emerald-500/20 text-zinc-200">
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold mb-3 bg-zinc-900 border border-emerald-500/30 text-zinc-200">
             <Clock className="w-3.5 h-3.5 text-emerald-400" />
             <span>
               {openStatus.statusText} ({openStatus.detailText})
@@ -168,9 +166,9 @@ export const Navbar: React.FC = () => {
             href={GYM_INFO.contact.whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-black text-center shadow-lg active:scale-95 text-sm uppercase tracking-wider"
+            className="flex items-center justify-center gap-2 w-full py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-center shadow-lg active:scale-95 text-sm uppercase tracking-wider"
           >
-            <MessageCircle className="w-4 h-4 text-black" />
+            <MessageCircle className="w-4 h-4 text-white" />
             <span>Falar no WhatsApp</span>
           </a>
         </div>
