@@ -34,9 +34,9 @@ export const FloatingWhatsapp: React.FC = () => {
       }`}
     >
       {/* Tooltip ao passar o mouse */}
-      <span className="hidden sm:inline-flex items-center gap-1.5 mr-3 px-3.5 py-1.5 rounded-xl bg-zinc-950 text-white text-xs font-bold shadow-lg opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all pointer-events-none whitespace-nowrap border border-red-900/60">
-        <Sparkles className="w-3.5 h-3.5 text-red-500" />
-        Aula Experimental • Fale Conosco
+      <span className="hidden sm:inline-flex items-center gap-1.5 mr-3 px-3.5 py-1.5 rounded-xl bg-zinc-950 text-white text-xs font-bold shadow-lg opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all pointer-events-none whitespace-nowrap border border-emerald-500/30">
+        <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+        Aula Experimental Gratuita • Fale Conosco
       </span>
 
       <a

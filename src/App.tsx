@@ -5,6 +5,7 @@ import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { StatementSection } from './components/StatementSection';
 import { Modalities } from './components/Modalities';
+import { Pricing } from './components/Pricing';
 import { Schedule } from './components/Schedule';
 import { LocationContact } from './components/LocationContact';
 import { Faq } from './components/Faq';
@@ -39,13 +40,14 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-zinc-950 flex flex-col selection:bg-red-600 selection:text-white font-sans antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white flex flex-col selection:bg-emerald-500 selection:text-black font-sans antialiased overflow-x-hidden">
       <Navbar />
       <main className="flex-grow">
         <Hero />
         <About />
         <StatementSection />
         <Modalities />
+        <Pricing />
         <Schedule />
         <LocationContact />
         <Faq />

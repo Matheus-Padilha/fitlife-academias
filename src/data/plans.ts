@@ -22,9 +22,9 @@ export const GYM_PLANS: PlanItem[] = [
   {
     id: 'experimental',
     name: 'Aula Experimental',
-    badge: 'Conheça a Vigour',
+    badge: '100% Gratuita',
     isPopular: false,
-    description: 'Experimente a estrutura da Vigour Academia e conheça nossos instrutores.',
+    description: 'Venha conhecer uma de nossas 4 unidades em Chapecó e treinar sem compromisso.',
     periodMonths: 0,
     pricing: {
       livre: {
@@ -34,74 +34,57 @@ export const GYM_PLANS: PlanItem[] = [
       }
     },
     benefits: [
-      'Acesso à musculação e modalidades',
+      'Acesso à musculação e área de cardio',
       'Acompanhamento de instrutores no salão',
-      'Estrutura acolhedora no Jardim Itália',
-      'Ambiente motivador para sua evolução',
-      'Agendamento direto pelo WhatsApp'
+      'Escolha qualquer uma das 4 unidades',
+      'Ambiente acolhedor e motivador',
+      'Agendamento rápido e direto pelo WhatsApp'
     ],
   },
   {
-    id: 'mensal',
-    name: 'Plano Mensal',
-    description: 'Treine com total flexibilidade e liberdade na sua rotina.',
+    id: 'plano-livre',
+    name: 'Plano FitLife Livre',
+    badge: 'Mais Escolhido',
+    isPopular: true,
+    description: 'Treine com máxima liberdade e flexibilidade de horários em todas as unidades.',
     periodMonths: 1,
     pricing: {
       livre: {
         monthlyEquivalent: 0,
         totalPeriod: 0,
-        installments: 'Consulte valores com nossa equipe',
+        installments: 'Consulte condições exclusivas',
       }
     },
     benefits: [
-      'Acesso total à musculação',
-      'Treinos de Cardio e Funcional',
-      'Equipe qualificada para tirar dúvidas',
-      'Sem fidelidade ou burocracia',
-      'Horários amplos de atendimento'
+      'Acesso livre às 4 unidades em Chapecó',
+      'Horário flexível: 06h às 22h sem fechar ao meio-dia',
+      'Área completa de musculação e pesos livres',
+      'Cardio moderno (esteiras, bikes e elípticos)',
+      'Suporte constante de profissionais qualificados',
+      'Aceitamos Gympass e TotalPass'
     ],
   },
   {
-    id: 'semestral',
-    name: 'Plano Semestral',
-    badge: 'Mais Procurado',
-    isPopular: true,
-    description: 'Mais economia e consistência para atingir suas metas.',
-    periodMonths: 6,
-    pricing: {
-      livre: {
-        monthlyEquivalent: 0,
-        totalPeriod: 0,
-        installments: 'Condições especiais no WhatsApp',
-      }
-    },
-    benefits: [
-      'Acesso livre a todas as modalidades',
-      'Acompanhamento contínuo de treino',
-      'Condições especiais para 6 meses',
-      'Orientação para musculação, cardio e funcional',
-      'Flexibilidade de pagamento'
-    ],
-  },
-  {
-    id: 'anual',
-    name: 'Plano Anual',
+    id: 'plano-fidelidade',
+    name: 'Plano Fidelidade',
     badge: 'Melhor Custo-Benefício',
-    description: 'Compromisso com sua saúde, longevidade e bem-estar o ano inteiro.',
+    isPopular: false,
+    description: 'Para quem busca transformação contínua, consistência e o melhor valor mensal.',
     periodMonths: 12,
     pricing: {
       livre: {
         monthlyEquivalent: 0,
         totalPeriod: 0,
-        installments: 'Parcelamento facilitado',
+        installments: 'Condição facilitada no cartão',
       }
     },
     benefits: [
-      'Melhor tarifa mensal equivalente',
-      'Acesso livre nos horários de funcionamento',
-      'Acompanhamento profissional permanente',
-      'Condições exclusivas para alunos',
-      'Saúde e bem-estar no mesmo lugar'
+      'Menor mensalidade garantida por 12 meses',
+      'Acesso irrestrito a toda a rede FitLife',
+      'Avaliação física e montagem de ficha de treino',
+      'Treinos de musculação, cardio e funcional inclusos',
+      'Benefícios especiais para renovação',
+      'Bloqueio temporário de férias sem custo'
     ],
-  },
+  }
 ];

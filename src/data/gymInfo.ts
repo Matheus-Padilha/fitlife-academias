@@ -8,47 +8,113 @@ export interface GymHours {
   intervals: Array<{ start: number; end: number }>;
 }
 
+export interface GymUnit {
+  id: string;
+  name: string;
+  badge?: string;
+  neighborhood: string;
+  address: string;
+  phone: string;
+  whatsappRaw: string;
+  mapsUrl: string;
+  rating: string;
+  reviewsCount?: string;
+  features: string[];
+}
+
 export const GYM_INFO = {
-  name: "Vigour Academia",
-  shortName: "Vigour",
-  tagline: "Saúde e Bem Estar no mesmo lugar",
-  subTagline: "Encontre a sua melhor versão aqui",
-  slogan: "O melhor momento para começar é agora",
+  name: "FitLife Academias",
+  shortName: "FitLife",
+  tagline: "Viva o agora! 💚",
+  subTagline: "Incentivando pessoas a melhorarem sua qualidade de vida",
+  slogan: "Sua melhor versão começa hoje na FitLife",
   address: {
-    street: "Rua Achiles Tomazeli, 170-D",
-    neighborhood: "Jardim Itália",
+    street: "R. John Kennedy, 1860-E (esq. com R. Jerusalém)",
+    neighborhood: "Passo dos Fortes",
     city: "Chapecó",
     state: "SC",
-    zipCode: "89814-010",
-    plusCode: "V9QP+7C Jardim Itália, Chapecó - SC",
-    full: "Rua Achiles Tomazeli, 170-D - Jardim Itália, Chapecó - SC, 89814-010",
-    googleMapsUrl: "https://maps.google.com/?q=Rua+Achiles+Tomazeli,+170-D+-+Jardim+Itália,+Chapecó+-+SC,+89814-010",
-    googleMapsEmbedUrl: "https://maps.google.com/maps?q=Rua+Achiles+Tomazeli,+170-D+-+Jardim+It%C3%A1lia,+Chapec%C3%B3+-+SC,+89814-010&t=&z=16&ie=UTF8&iwloc=&output=embed"
+    zipCode: "89805-000",
+    plusCode: "W93M+8J Chapecó - SC",
+    full: "R. John Kennedy, 1860-E - Passo dos Fortes, Chapecó - SC",
+    googleMapsUrl: "https://maps.google.com/?q=FitLife+Passo+Dos+Fortes+Chapeco",
+    googleMapsEmbedUrl: "https://maps.google.com/maps?q=FitLife+Passo+Dos+Fortes+Chapeco&t=&z=16&ie=UTF8&iwloc=&output=embed"
   },
   contact: {
-    phoneFormatted: "(49) 3323-9134",
-    whatsappFormatted: "(49) 3323-9134",
-    whatsappRaw: "554933239134",
-    whatsappLink: "https://wa.me/message/CP6TBOOQWHCK1",
-    instagramHandle: "@academiavigour",
-    instagramUrl: "https://www.instagram.com/academiavigour/",
-    firstClassFreeText: "Agende sua aula experimental! Venha conhecer nossa estrutura e equipe."
+    phoneFormatted: "(49) 3322-1919",
+    whatsappFormatted: "(49) 3322-1919",
+    whatsappRaw: "554933221919",
+    whatsappLink: "https://wa.me/554933221919?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20FitLife%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20planos.",
+    instagramHandle: "@fitlifepassodosfortes",
+    instagramUrl: "https://www.instagram.com/fitlifepassodosfortes/",
+    firstClassFreeText: "Agende sua aula experimental gratuita! Venha conhecer nossa estrutura e equipe."
   },
+  units: [
+    {
+      id: "passo-dos-fortes",
+      name: "Unidade Passo dos Fortes (Matriz)",
+      badge: "4.7 ★ (+100 Avaliações)",
+      neighborhood: "Passo dos Fortes",
+      address: "R. John Kennedy, 1860-E (esquina com R. Jerusalém)",
+      phone: "(49) 3322-1919",
+      whatsappRaw: "554933221919",
+      mapsUrl: "https://maps.google.com/?q=FitLife+Passo+Dos+Fortes+Chapeco",
+      rating: "4.7 ★",
+      reviewsCount: "103+ avaliações",
+      features: ["Salão amplo de musculação", "Área de cardio dedicada", "Estacionamento facilitado"]
+    },
+    {
+      id: "esplanada",
+      name: "Unidade Esplanada",
+      badge: "4.6 ★",
+      neighborhood: "Esplanada",
+      address: "R. Borges de Medeiros, 1280 (esquina com Voluntários da Pátria)",
+      phone: "(49) 3322-1919",
+      whatsappRaw: "554933221919",
+      mapsUrl: "https://maps.google.com/?q=Fitlife+Academia+Esplanada+Chapeco",
+      rating: "4.6 ★",
+      reviewsCount: "15 avaliações",
+      features: ["Equipamentos modernos", "Treino funcional e cardio", "Climatização total"]
+    },
+    {
+      id: "medici",
+      name: "Unidade Presidente Médici",
+      badge: "Região Sul",
+      neighborhood: "Presidente Médici",
+      address: "Atendimento completo na Região Sul de Chapecó",
+      phone: "(49) 3322-1919",
+      whatsappRaw: "554933221919",
+      mapsUrl: "https://maps.google.com/?q=Fitlife+Academia+Chapeco",
+      rating: "4.7 ★",
+      features: ["Espaço integrado de força", "Professores no salão", "Acolhimento humanizado"]
+    },
+    {
+      id: "efapi",
+      name: "Unidade Grande Efapi",
+      badge: "Maior Bairro",
+      neighborhood: "Efapi",
+      address: "Ponto estratégico na Grande Efapi em Chapecó",
+      phone: "(49) 3322-1919",
+      whatsappRaw: "554933221919",
+      mapsUrl: "https://maps.google.com/?q=Fitlife+Academia+Chapeco",
+      rating: "4.7 ★",
+      features: ["Ambiente moderno e dinâmico", "Ciclismo indoor e pesos livres", "Vestiários estruturados"]
+    }
+  ] as GymUnit[],
   modalities: [
     {
       id: "musculacao",
       name: "Musculação",
-      description: "Aparelhos modernos e ampla área de pesos livres para hipertrofia, força, resistência e definição muscular com acompanhamento atento de instrutores."
+      description: "Aparelhos ergonômicos e pesos livres de alta durabilidade para hipertrofia, emagrecimento, força e definição com orientação especializada de instrutores."
     },
     {
       id: "cardio",
-      name: "Cardio",
-      description: "Equipamentos e treinos focados em resistência cardiovascular, saúde do coração, alta queima calórica e condicionamento físico constante."
+      name: "Cardio & Ciclismo",
+      description: "Esteiras, bikes e elípticos de última geração focados em queima calórica, aumento da resistência cardiovascular e saúde do coração."
     },
     {
       id: "funcional",
-      name: "Funcional",
-      description: "Exercícios dinâmicos que trabalham movimentos naturais do corpo, equilíbrio, coordenação, força de core e agilidade para o seu dia a dia."
+      name: "Treinamento Funcional",
+      description: "Exercícios dinâmicos com peso corporal, kettlebells e elásticos que aumentam a mobilidade, equilíbrio e agilidade para o cotidiano."
     }
   ],
   schedule: [
@@ -57,82 +123,67 @@ export const GYM_INFO = {
       shortDay: "Seg",
       dayIndex: 1,
       shifts: ["06:00 às 22:00"],
-      note: "06h às 22h",
+      note: "06h às 22h sem fechar ao meio-dia",
       isOpenDay: true,
-      intervals: [
-        { start: 6 * 60, end: 22 * 60 }
-      ]
+      intervals: [{ start: 6 * 60, end: 22 * 60 }]
     },
     {
       day: "Terça-feira",
       shortDay: "Ter",
       dayIndex: 2,
-      shifts: ["06:00 às 11:00", "14:00 às 22:00"],
-      note: "06h às 11h e 14h às 22h",
+      shifts: ["06:00 às 22:00"],
+      note: "06h às 22h sem fechar ao meio-dia",
       isOpenDay: true,
-      intervals: [
-        { start: 6 * 60, end: 11 * 60 },
-        { start: 14 * 60, end: 22 * 60 }
-      ]
+      intervals: [{ start: 6 * 60, end: 22 * 60 }]
     },
     {
       day: "Quarta-feira",
       shortDay: "Qua",
       dayIndex: 3,
       shifts: ["06:00 às 22:00"],
-      note: "06h às 22h",
+      note: "06h às 22h sem fechar ao meio-dia",
       isOpenDay: true,
-      intervals: [
-        { start: 6 * 60, end: 22 * 60 }
-      ]
+      intervals: [{ start: 6 * 60, end: 22 * 60 }]
     },
     {
       day: "Quinta-feira",
       shortDay: "Qui",
       dayIndex: 4,
-      shifts: ["06:00 às 11:00", "14:00 às 22:00"],
-      note: "06h às 11h e 14h às 22h",
+      shifts: ["06:00 às 22:00"],
+      note: "06h às 22h sem fechar ao meio-dia",
       isOpenDay: true,
-      intervals: [
-        { start: 6 * 60, end: 11 * 60 },
-        { start: 14 * 60, end: 22 * 60 }
-      ]
+      intervals: [{ start: 6 * 60, end: 22 * 60 }]
     },
     {
       day: "Sexta-feira",
       shortDay: "Sex",
       dayIndex: 5,
       shifts: ["06:00 às 22:00"],
-      note: "06h às 22h",
+      note: "06h às 22h sem fechar ao meio-dia",
       isOpenDay: true,
-      intervals: [
-        { start: 6 * 60, end: 22 * 60 }
-      ]
+      intervals: [{ start: 6 * 60, end: 22 * 60 }]
     },
     {
       day: "Sábado",
       shortDay: "Sáb",
       dayIndex: 6,
-      shifts: ["07:00 às 10:00"],
-      note: "07h às 10h",
+      shifts: ["08:00 às 16:00"],
+      note: "08h às 16h",
       isOpenDay: true,
-      intervals: [
-        { start: 7 * 60, end: 10 * 60 }
-      ]
+      intervals: [{ start: 8 * 60, end: 16 * 60 }]
     },
     {
       day: "Domingo",
       shortDay: "Dom",
       dayIndex: 0,
       shifts: ["Fechada"],
-      note: "Fechada aos domingos",
+      note: "Consulte horários especiais",
       isOpenDay: false,
       intervals: []
     }
   ]
 };
 
-// Helper function to check if the gym is open right now
 export function getGymOpenStatus(now = new Date()): {
   isOpen: boolean;
   statusText: string;
@@ -140,10 +191,8 @@ export function getGymOpenStatus(now = new Date()): {
 } {
   const dayIndex = now.getDay();
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
   const currentDaySchedule = GYM_INFO.schedule.find(s => s.dayIndex === dayIndex);
 
-  // 1. Check if currently open
   if (currentDaySchedule && currentDaySchedule.isOpenDay) {
     const matchingInterval = currentDaySchedule.intervals.find(
       i => currentMinutes >= i.start && currentMinutes < i.end
@@ -160,7 +209,6 @@ export function getGymOpenStatus(now = new Date()): {
       };
     }
 
-    // 2. Check if reopens later today (e.g. Ter/Qui afternoon shift)
     const nextIntervalToday = currentDaySchedule.intervals.find(i => i.start > currentMinutes);
     if (nextIntervalToday) {
       const startHour = Math.floor(nextIntervalToday.start / 60);
@@ -174,7 +222,6 @@ export function getGymOpenStatus(now = new Date()): {
     }
   }
 
-  // 3. If closed for the rest of today or not open today, find the next open day
   for (let offset = 1; offset <= 7; offset++) {
     const nextDayIndex = (dayIndex + offset) % 7;
     const nextDaySchedule = GYM_INFO.schedule.find(s => s.dayIndex === nextDayIndex);

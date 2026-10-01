@@ -1,117 +1,127 @@
 import React from 'react';
 import { GYM_INFO } from '../data/gymInfo';
-import localizacaoImg from '../assets/imagem localizacao.jpeg';
-import { Navigation, Phone, Instagram } from 'lucide-react';
+import { MapPin, Navigation, Phone, Instagram, Star, Clock } from 'lucide-react';
 
 export const LocationContact: React.FC = () => {
   return (
-    <section id="localizacao" className="py-24 bg-white relative border-b border-zinc-200">
+    <section id="unidades" className="py-24 bg-[#0A0A0A] relative border-b border-zinc-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Cabeçalho */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-5xl font-black font-display text-zinc-950 uppercase tracking-tight">
-            Como Chegar & <span className="text-red-600">Localização</span>
+          <span className="text-emerald-400 font-semibold tracking-wider text-xs sm:text-sm uppercase mb-2 block">
+            Presença Estratégica em Chapecó
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-black font-display text-white uppercase tracking-tight">
+            Nossas <span className="text-emerald-400">4 Unidades</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-zinc-600">
-            Localizada na Rua Achiles Tomazeli, no bairro Jardim Itália em Chapecó - SC.
+          <p className="mt-4 text-base sm:text-lg text-zinc-400">
+            Treine perto de casa ou do trabalho. Escolha a unidade mais conveniente e aproveite a mesma qualidade FitLife em toda Chapecó.
           </p>
         </div>
 
-        {/* Informações rápidas em cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-10">
-          <div className="p-5 rounded-2xl bg-[#FAFAFA] border border-zinc-200/80 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-600 flex-shrink-0">
-              <Navigation className="w-5 h-5" />
+        {/* Grid das 4 Unidades */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto mb-16">
+          {GYM_INFO.units.map((unit) => (
+            <div
+              key={unit.id}
+              className="p-6 sm:p-8 rounded-3xl bg-[#141414] border border-zinc-800 hover:border-emerald-500/50 transition-all duration-300 flex flex-col justify-between group hover:shadow-[0_10px_30px_rgba(16,185,129,0.1)]"
+            >
+              <div>
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <MapPin className="w-3.5 h-3.5" />
+                    {unit.badge || unit.neighborhood}
+                  </span>
+                  <div className="flex items-center gap-1 text-amber-400 text-xs font-bold bg-zinc-900 px-2.5 py-1 rounded-full border border-zinc-800">
+                    <Star className="w-3.5 h-3.5 fill-current" />
+                    <span>{unit.rating}</span>
+                  </div>
+                </div>
+
+                <h3 className="text-xl sm:text-2xl font-bold font-display text-white group-hover:text-emerald-400 transition-colors">
+                  {unit.name}
+                </h3>
+
+                <p className="text-sm text-zinc-300 mt-2 leading-relaxed">
+                  {unit.address}
+                </p>
+
+                {/* Features */}
+                <div className="mt-4 space-y-1.5 pt-4 border-t border-zinc-800/80">
+                  {unit.features.map((feat, i) => (
+                    <div key={i} className="flex items-center gap-2 text-xs text-zinc-400">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      <span>{feat}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Ações da Unidade */}
+              <div className="mt-6 pt-5 border-t border-zinc-800/80 flex items-center justify-between gap-3">
+                <a
+                  href={unit.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-200 text-xs font-semibold border border-zinc-700 hover:border-emerald-500/50 hover:text-emerald-400 transition-all"
+                >
+                  <Navigation className="w-3.5 h-3.5" />
+                  <span>Ver Rota no Maps</span>
+                </a>
+
+                <a
+                  href={`https://wa.me/${unit.whatsappRaw}?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20${encodeURIComponent(unit.name)}.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold transition-all shadow-md shadow-emerald-500/20"
+                >
+                  <Phone className="w-3.5 h-3.5" />
+                  <span>Falar com Recepção</span>
+                </a>
+              </div>
             </div>
-            <div>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-900">Endereço</h3>
-              <p className="text-sm text-zinc-600 mt-1">{GYM_INFO.address.full}</p>
-              <p className="text-xs text-zinc-400 mt-0.5">{GYM_INFO.address.plusCode}</p>
+          ))}
+        </div>
+
+        {/* Barra de Canais Oficiais */}
+        <div className="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-zinc-900 via-[#141414] to-zinc-900 border border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+          <div>
+            <div className="flex items-center justify-center sm:justify-start gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1">
+              <Clock className="w-4 h-4" />
+              <span>Horário Estendido</span>
             </div>
+            <h4 className="text-lg font-bold text-white">
+              Segunda a Sexta: 06h às 22h sem fechar ao meio-dia
+            </h4>
+            <p className="text-xs text-zinc-400 mt-1">
+              Sábados das 08h às 16h. Atendimento rápido em todas as recepções.
+            </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#FAFAFA] border border-zinc-200/80 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-600 flex-shrink-0">
-              <Phone className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-900">WhatsApp / Telefone</h3>
-              <p className="text-sm text-zinc-600 mt-1">{GYM_INFO.contact.phoneFormatted}</p>
-              <a
-                href={GYM_INFO.contact.whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-semibold text-red-600 hover:underline mt-0.5 inline-block"
-              >
-                Chamar no WhatsApp →
-              </a>
-            </div>
-          </div>
+          <div className="flex items-center gap-3">
+            <a
+              href={GYM_INFO.contact.whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-500/20 transition-all"
+            >
+              <Phone className="w-4 h-4" />
+              <span>{GYM_INFO.contact.phoneFormatted}</span>
+            </a>
 
-          <div className="p-5 rounded-2xl bg-[#FAFAFA] border border-zinc-200/80 flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-600 flex-shrink-0">
-              <Instagram className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-900">Instagram</h3>
-              <p className="text-sm text-zinc-600 mt-1">{GYM_INFO.contact.instagramHandle}</p>
-              <a
-                href={GYM_INFO.contact.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-semibold text-red-600 hover:underline mt-0.5 inline-block"
-              >
-                Seguir no Instagram →
-              </a>
-            </div>
+            <a
+              href={GYM_INFO.contact.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white border border-zinc-700 transition-all"
+              aria-label="Instagram FitLife"
+            >
+              <Instagram className="w-4 h-4" />
+            </a>
           </div>
         </div>
 
-        {/* Container: Mapa à esquerda e Fachada à direita */}
-        <div className="max-w-6xl mx-auto rounded-2xl border border-zinc-200 overflow-hidden shadow-card grid grid-cols-1 lg:grid-cols-2 bg-white mb-6">
-          {/* Lado Esquerdo: Mapa Interativo */}
-          <div className="relative h-[380px] sm:h-[460px] lg:h-[520px] bg-zinc-100 flex flex-col border-b lg:border-b-0 lg:border-r border-zinc-200">
-            <iframe
-              title={`Localização ${GYM_INFO.name} Chapecó`}
-              src={GYM_INFO.address.googleMapsEmbedUrl}
-              className="w-full h-full flex-1 border-0"
-              allowFullScreen={false}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-            {/* Barra informativa inferior do mapa */}
-            <div className="p-4 bg-white border-t border-zinc-200 flex flex-wrap items-center justify-between gap-3 text-xs text-zinc-600">
-              <span className="font-semibold text-zinc-800">
-                {GYM_INFO.address.street} • {GYM_INFO.address.neighborhood} ({GYM_INFO.address.city} - {GYM_INFO.address.state})
-              </span>
-              <a
-                href={GYM_INFO.address.googleMapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-bold text-red-600 hover:text-red-700 hover:underline inline-flex items-center gap-1"
-              >
-                <Navigation className="w-3 h-3" />
-                Traçar rota no GPS →
-              </a>
-            </div>
-          </div>
-
-          {/* Lado Direito: Imagem Real da Fachada da Vigour Academia */}
-          <div className="relative h-[380px] sm:h-[460px] lg:h-[520px] bg-black flex items-center justify-center overflow-hidden">
-            <img
-              src={localizacaoImg}
-              alt={`Fachada da ${GYM_INFO.name} em Chapecó`}
-              className="w-full h-full object-cover select-none pointer-events-none"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
-            <div className="absolute bottom-6 left-6 right-6 text-white pointer-events-none">
-              <span className="text-xs font-extrabold uppercase px-2.5 py-1 rounded bg-red-600 text-white inline-block mb-2">
-                Chapecó - SC
-              </span>
-              <h4 className="text-xl font-bold font-display">{GYM_INFO.name}</h4>
-              <p className="text-xs text-zinc-300 mt-1">{GYM_INFO.address.street} - {GYM_INFO.address.neighborhood}</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { GYM_INFO } from '../data/gymInfo';
 import fotoMusculacao from '../assets/imagem musculacao.png';
-import fotoCardio from '../assets/imagem jiu jitsu.png';
-import fotoFuncional from '../assets/imagem boxe.png';
+import fotoCardio from '../assets/imagem cardio.png';
+import fotoFuncional from '../assets/imagem sobre.png';
 
 interface ModalityItem {
   id: string;
@@ -20,34 +20,34 @@ const MODALITIES: ModalityItem[] = [
   {
     id: 'musculacao',
     title: 'Musculação',
-    badge: 'Estrutura Completa',
+    badge: 'Hipertrofia & Força',
     description:
-      'Aparelhos selecionados e ampla área de pesos livres para hipertrofia, força, resistência e definição muscular, com o apoio atencioso e a orientação próxima de instrutores qualificados.',
-    highlights: ['Hipertrofia & Força', 'Equipamentos Completos', 'Acompanhamento Próximo', 'Treino Seguro'],
+      'Aparelhos modernos e área completa de pesos livres para ganho de massa, força, resistência e definição muscular. Acompanhamento atento de instrutores no salão para garantir execução correta e segurança.',
+    highlights: ['Aparelhos Ergonômicos', 'Pesos Livres Completos', 'Instrutores no Salão', 'Treino Seguro & Eficiente'],
     image: fotoMusculacao,
-    alt: 'Musculação Completa na Vigour Academia',
+    alt: 'Musculação Completa na FitLife Academias Chapecó',
     imageScale: '',
   },
   {
     id: 'cardio',
-    title: 'Cardio',
-    badge: 'Resistência & Saúde',
+    title: 'Cardio & Ciclismo',
+    badge: 'Resistência & Queima',
     description:
-      'Treinos focados na saúde cardiovascular, melhora da capacidade respiratória, alta queima calórica e condicionamento físico geral para manter seu corpo ativo e com disposição.',
-    highlights: ['Saúde Cardiovascular', 'Queima Calórica', 'Resistência Física', 'Vitalidade Diária'],
+      'Esteiras, bikes de spinning e elípticos de ponta para potencializar sua capacidade cardiorrespiratória, queimar calorias e manter sua disposição e energia em alta durante todo o dia.',
+    highlights: ['Esteiras & Bikes Modernas', 'Alta Queima Calórica', 'Resistência Cardiovascular', 'Mais Disposição Diária'],
     image: fotoCardio,
-    alt: 'Área de Cardio na Vigour Academia',
+    alt: 'Área de Cardio e Ciclismo na FitLife Academias',
     imageScale: '',
   },
   {
     id: 'funcional',
-    title: 'Funcional',
-    badge: 'Dinamismo & Equilíbrio',
+    title: 'Treinamento Funcional',
+    badge: 'Mobilidade & Agilidade',
     description:
-      'Exercícios dinâmicos que trabalham movimentos naturais do corpo, fortalecimento do core, coordenação motora e agilidade para o seu dia a dia.',
-    highlights: ['Agilidade & Coordenação', 'Fortalecimento do Core', 'Mobilidade Articular', 'Aulas Dinâmicas'],
+      'Exercícios que utilizam o peso do próprio corpo, elásticos e pesos livres para desenvolver equilíbrio, coordenação, fortalecimento do core e agilidade para sua rotina diária.',
+    highlights: ['Fortalecimento do Core', 'Agilidade & Equilíbrio', 'Mobilidade Articular', 'Aulas Dinâmicas & Coletivas'],
     image: fotoFuncional,
-    alt: 'Treino Funcional na Vigour Academia',
+    alt: 'Treinamento Funcional na FitLife Academias',
     imageScale: '',
   },
 ];
@@ -66,11 +66,7 @@ export const Modalities: React.FC = () => {
   const isDragging = useRef<boolean>(false);
   const isDragActionRef = useRef<boolean>(false);
 
-  // Intersection observer to pause timer when section is not visible
   useEffect(() => {
-    const currentSection = sectionRef.current;
-    if (!currentSection) return;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsInView(entry.isIntersecting);
@@ -78,32 +74,41 @@ export const Modalities: React.FC = () => {
       { threshold: 0.3 }
     );
 
-    observer.observe(currentSection);
-    return () => observer.disconnect();
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
-  // Autoplay timer
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView) {
+      return;
+    }
 
     const duration = 6000;
     const intervalTime = 50;
     const step = (intervalTime / duration) * 100;
 
-    const interval = setInterval(() => {
+    const timer = setInterval(() => {
       setProgress((prev) => {
-        const next = prev + step;
-        if (next >= 100) {
-          setCurrentIndex((idx) => (idx + 1) % MODALITIES.length);
+        if (prev >= 100) {
+          setCurrentIndex((curr) => (curr + 1) % MODALITIES.length);
           return 0;
         }
-        setRemainingSeconds(Math.ceil(((100 - next) / 100) * (duration / 1000)));
-        return next;
+        return prev + step;
       });
     }, intervalTime);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
   }, [currentIndex, isInView]);
+
+  useEffect(() => {
+    const remaining = Math.ceil(6 * (1 - progress / 100));
+    setRemainingSeconds(remaining);
+  }, [progress]);
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
@@ -112,14 +117,17 @@ export const Modalities: React.FC = () => {
   };
 
   const nextSlide = () => {
-    goToSlide((currentIndex + 1) % MODALITIES.length);
+    setCurrentIndex((prev) => (prev + 1) % MODALITIES.length);
+    setProgress(0);
+    setRemainingSeconds(6);
   };
 
   const prevSlide = () => {
-    goToSlide((currentIndex - 1 + MODALITIES.length) % MODALITIES.length);
+    setCurrentIndex((prev) => (prev - 1 + MODALITIES.length) % MODALITIES.length);
+    setProgress(0);
+    setRemainingSeconds(6);
   };
 
-  // Touch & drag handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchEndX.current = e.touches[0].clientX;
@@ -135,13 +143,11 @@ export const Modalities: React.FC = () => {
 
   const handleTouchEnd = () => {
     const diff = touchStartX.current - touchEndX.current;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) nextSlide();
-      else prevSlide();
+    if (diff > 50) {
+      nextSlide();
+    } else if (diff < -50) {
+      prevSlide();
     }
-    setTimeout(() => {
-      isDragActionRef.current = false;
-    }, 100);
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -163,40 +169,39 @@ export const Modalities: React.FC = () => {
     if (!isDragging.current) return;
     isDragging.current = false;
     const diff = touchStartX.current - touchEndX.current;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) nextSlide();
-      else prevSlide();
+    if (diff > 50) {
+      nextSlide();
+    } else if (diff < -50) {
+      prevSlide();
     }
-    setTimeout(() => {
-      isDragActionRef.current = false;
-    }, 100);
   };
 
   return (
     <section
       id="modalidades"
       ref={sectionRef}
-      className="py-24 bg-[#0A0A0A] relative overflow-hidden select-none border-b border-zinc-900"
+      className="py-20 sm:py-28 bg-[#0A0A0A] relative overflow-hidden select-none border-b border-zinc-900"
     >
-      {/* Background glow effects sutis em vermelho */}
-      <div className="absolute top-1/4 -right-40 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 -left-40 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
-
-      {/* Header da seção */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center">
-        <h2 className="text-3xl sm:text-5xl font-black font-display text-white uppercase tracking-tight">
-          Nossas <span className="text-red-500">Modalidades</span>
-        </h2>
-        <p className="mt-3 text-zinc-400 text-sm sm:text-base max-w-2xl mx-auto">
-          Musculação, Cardio e Funcional com acompanhamento atencioso de instrutores. Agende sua <strong>aula experimental</strong>!
-        </p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <span className="text-emerald-400 font-semibold tracking-wider text-xs sm:text-sm uppercase mb-2 block">
+              Modalidades FitLife
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-black font-display text-white tracking-tight uppercase">
+              O que você vai <span className="text-emerald-400">treinar</span>
+            </h2>
+          </div>
+          <p className="text-zinc-400 text-sm sm:text-base max-w-md">
+            Espaços projetados para sua evolução diária, com suporte completo de instrutores em todas as unidades.
+          </p>
+        </div>
       </div>
 
-      {/* Carrossel Interativo */}
-      <div className="relative w-full overflow-hidden">
+      <div className="relative overflow-hidden w-full">
         <div
           ref={sliderRef}
-          className="flex transition-transform duration-500 ease-out cursor-grab active:cursor-grabbing"
+          className="flex transition-transform duration-700 ease-out cursor-grab active:cursor-grabbing"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -216,7 +221,7 @@ export const Modalities: React.FC = () => {
                 {/* Coluna Esquerda: Textos & Barra de Progresso */}
                 <div className="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1">
                   <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold tracking-widest text-zinc-400 uppercase mb-2 sm:mb-4">
-                    <span className="text-red-500 text-sm sm:text-lg font-black">
+                    <span className="text-emerald-400 text-sm sm:text-lg font-black">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <span className="text-zinc-600">/</span>
@@ -237,7 +242,7 @@ export const Modalities: React.FC = () => {
                   <div className="grid grid-cols-2 gap-2 mb-8 max-w-md">
                     {item.highlights.map((h, i) => (
                       <div key={i} className="flex items-center gap-2 text-xs sm:text-sm text-zinc-300 font-medium">
-                        <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                         <span>{h}</span>
                       </div>
                     ))}
@@ -249,13 +254,13 @@ export const Modalities: React.FC = () => {
                       <span className="text-zinc-300">
                         {isInView ? 'Troca Automática' : 'Pausado'}
                       </span>
-                      <span className="text-red-500 font-mono font-bold text-xs sm:text-sm">
+                      <span className="text-emerald-400 font-mono font-bold text-xs sm:text-sm">
                         {remainingSeconds}s
                       </span>
                     </div>
                     <div className="h-1.5 sm:h-2 w-full bg-zinc-900 rounded-full overflow-hidden p-0.5">
                       <div
-                        className="h-full bg-red-600 rounded-full transition-all ease-linear shadow-xs shadow-red-600/50"
+                        className="h-full bg-emerald-500 rounded-full transition-all ease-linear shadow-xs shadow-emerald-500/50"
                         style={{
                           width:
                             currentIndex === index
@@ -269,14 +274,14 @@ export const Modalities: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Coluna Direita: Imagem Real da Modalidade com Elemento Orgânico em Vermelho */}
+                {/* Coluna Direita: Imagem Real com Elemento Orgânico em Verde Esmeralda */}
                 <div className="lg:col-span-5 flex items-center justify-center lg:justify-end order-1 lg:order-2 overflow-visible">
                   <div className="relative w-full max-w-md lg:max-w-none flex items-center justify-center h-[260px] sm:h-[380px] lg:h-[540px]">
-                    {/* Elemento orgânico distorcido em vermelho da marca Vigour */}
+                    {/* Elemento orgânico em verde esmeralda */}
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
                       <svg
                         viewBox="0 0 1000 1450"
-                        className="w-full h-full max-h-[500px] text-[#DC2626] object-contain select-none"
+                        className="w-full h-full max-h-[500px] text-[#10B981] object-contain select-none opacity-90 drop-shadow-[0_0_35px_rgba(16,185,129,0.3)]"
                         fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg"
                       >
@@ -302,18 +307,18 @@ export const Modalities: React.FC = () => {
       <button
         onClick={prevSlide}
         aria-label="Modalidade anterior"
-        className="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 text-white/80 hover:text-white bg-black/70 backdrop-blur-md rounded-full transition-all duration-300 hover:scale-110 active:scale-90 cursor-pointer p-2 sm:p-3 border border-red-600/30"
+        className="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 text-white/80 hover:text-white bg-black/70 backdrop-blur-md rounded-full transition-all duration-300 hover:scale-110 active:scale-90 cursor-pointer p-2 sm:p-3 border border-emerald-500/30"
       >
-        <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8 text-red-500" />
+        <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-400" />
       </button>
 
       {/* Seta direita */}
       <button
         onClick={nextSlide}
         aria-label="Próxima modalidade"
-        className="absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 text-white/80 hover:text-white bg-black/70 backdrop-blur-md rounded-full transition-all duration-300 hover:scale-110 active:scale-90 cursor-pointer p-2 sm:p-3 border border-red-600/30"
+        className="absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 text-white/80 hover:text-white bg-black/70 backdrop-blur-md rounded-full transition-all duration-300 hover:scale-110 active:scale-90 cursor-pointer p-2 sm:p-3 border border-emerald-500/30"
       >
-        <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8 text-red-500" />
+        <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-400" />
       </button>
 
       {/* Indicadores de slides */}
@@ -325,7 +330,7 @@ export const Modalities: React.FC = () => {
             aria-label={`Ir para modalidade ${dotIndex + 1}`}
             className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
               currentIndex === dotIndex
-                ? 'w-8 bg-red-600 shadow-md shadow-red-600/50'
+                ? 'w-8 bg-emerald-500 shadow-md shadow-emerald-500/50'
                 : 'w-2.5 bg-zinc-800 hover:bg-zinc-600'
             }`}
           />
